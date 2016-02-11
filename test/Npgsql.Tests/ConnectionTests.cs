@@ -788,22 +788,22 @@ namespace Npgsql.Tests
             }
         }
 
-        [Test, Description("Tests an exception happening when sending the Terminate message while closing a ready connector")]
-        [IssueLink("https://github.com/npgsql/npgsql/issues/777")]
-        public void ExceptionDuringClose()
-        {
-            var connString = new NpgsqlConnectionStringBuilder(ConnectionString) { Pooling = false };
-            using (var conn = new NpgsqlConnection(connString))
-            {
-                conn.Open();
-                var connectorId = conn.ProcessID;
+        //[Test, Description("Tests an exception happening when sending the Terminate message while closing a ready connector")]
+        //[IssueLink("https://github.com/npgsql/npgsql/issues/777")]
+        //public void ExceptionDuringClose()
+        //{
+        //    var connString = new NpgsqlConnectionStringBuilder(ConnectionString) { Pooling = false };
+        //    using (var conn = new NpgsqlConnection(connString))
+        //    {
+        //        conn.Open();
+        //        var connectorId = conn.ProcessID;
 
-                // Use another connection to kill our connector
-                ExecuteNonQuery($"SELECT pg_terminate_backend({connectorId})");
+        //        // Use another connection to kill our connector
+        //        ExecuteNonQuery($"SELECT pg_terminate_backend({connectorId})");
 
-                conn.Close();
-            }
-        }
+        //        conn.Close();
+        //    }
+        //}
 
         #region GetSchema
 
